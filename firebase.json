@@ -1,10 +1,4 @@
 {
-  "firestore": {
-    "rules": "firestore.rules"
-  },
-  "storage": {
-    "rules": "storage.rules"
-  },
   "hosting": {
     "public": ".",
     "ignore": [
@@ -16,5 +10,8 @@
       "firestore.rules",
       "storage.rules"
     ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
   }
 }
