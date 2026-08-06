@@ -5,6 +5,6 @@ export const firebaseConfig = {
   authDomain: "sorapbox.firebaseapp.com",
   projectId: "sorapbox",
   storageBucket: "sorapbox.firebasestorage.app",
-  messagingSenderId: "606777539559"
-  // appId: "Firebaseコンソールに表示されたappIdをここへ追加できます"
+  messagingSenderId: "606777539559",
+  appId: "1:606777539559:web:d2c9d6c84fde56307e1b42"
 };
