@@ -2,24 +2,39 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    function signedInAs(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
     match /users/{userId} {
-      allow read: if request.auth != null && request.auth.uid == userId;
-      allow create, update: if request.auth != null
-                            && request.auth.uid == userId
+      allow read: if signedInAs(userId);
+      allow create, update: if signedInAs(userId)
                             && request.resource.data.uid == userId;
 
       match /items/{itemId} {
-        allow read: if request.auth != null && request.auth.uid == userId;
-        allow create: if request.auth != null
-                      && request.auth.uid == userId
+        allow read: if signedInAs(userId);
+        allow create: if signedInAs(userId)
                       && request.resource.data.ownerId == userId;
-        allow update: if request.auth != null
-                      && request.auth.uid == userId
+        allow update: if signedInAs(userId)
                       && resource.data.ownerId == userId
                       && request.resource.data.ownerId == userId;
-        allow delete: if request.auth != null
-                      && request.auth.uid == userId
+        allow delete: if signedInAs(userId)
                       && resource.data.ownerId == userId;
+
+        match /chunks/{chunkId} {
+          allow read: if signedInAs(userId);
+          allow create: if signedInAs(userId)
+                        && request.resource.data.ownerId == userId
+                        && request.resource.data.data is string
+                        && request.resource.data.data.size() <= 900000;
+          allow update: if signedInAs(userId)
+                        && resource.data.ownerId == userId
+                        && request.resource.data.ownerId == userId
+                        && request.resource.data.data is string
+                        && request.resource.data.data.size() <= 900000;
+          allow delete: if signedInAs(userId)
+                        && resource.data.ownerId == userId;
+        }
       }
     }
   }
