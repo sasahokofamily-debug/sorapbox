@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#1677ff">
+  <meta name="description" content="sorapbox（ソラップBOX）- ファイルをかんたんに保存・整理するクラウドストレージ">
+  <title>sorapbox｜ソラップBOX</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div id="loadingScreen" class="loading-screen" aria-live="polite">
+    <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+    <strong>sorapbox</strong>
+    <small>安全に読み込んでいます…</small>
+  </div>
+
+  <section id="authScreen" class="auth-screen hidden" aria-label="ログイン">
+    <div class="auth-art">
+      <div class="auth-brand">
+        <div class="brand-mark brand-mark-large" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div>
+          <h1>sorapbox</h1>
+          <p>ソラップBOX</p>
+        </div>
+      </div>
+      <div class="cloud-visual" aria-hidden="true">
+        <div class="cloud-card cloud-card-a">IMG</div>
+        <div class="cloud-card cloud-card-b">PDF</div>
+        <div class="cloud-card cloud-card-c">ZIP</div>
+        <div class="cloud-core">☁</div>
+      </div>
+      <h2>あなたのファイルを、<br>いつでもすぐそばに。</h2>
+      <p class="auth-copy">写真、動画、書類、ゲームデータ。ひとつのBOXへ安全にまとめます。</p>
+    </div>
+
+    <div class="auth-panel">
+      <form id="authForm" class="auth-card" novalidate>
+        <span class="eyebrow">SORAPBOX v1</span>
+        <h2 id="authTitle">ログイン</h2>
+        <p id="authLead">メールアドレスとパスワードを入力してください。</p>
+
+        <label>
+          <span>メールアドレス</span>
+          <input id="emailInput" type="email" autocomplete="email" placeholder="you@example.com" required>
+        </label>
+        <label>
+          <span>パスワード</span>
+          <div class="password-field">
+            <input id="passwordInput" type="password" autocomplete="current-password" minlength="6" placeholder="6文字以上" required>
+            <button id="togglePassword" class="icon-button small" type="button" aria-label="パスワードを表示">◉</button>
+          </div>
+        </label>
+
+        <p id="authError" class="form-error" role="alert"></p>
+        <button id="authSubmit" class="primary-button full" type="submit">ログイン</button>
+        <button id="switchAuthMode" class="text-button full" type="button">新しいアカウントを作る</button>
+        <p class="auth-note">保存データはログインした本人だけが開けます。</p>
+      </form>
+    </div>
+  </section>
+
+  <div id="appShell" class="app-shell hidden">
+    <header class="topbar">
+      <button id="mobileMenuButton" class="icon-button mobile-only" type="button" aria-label="メニューを開く">☰</button>
+      <a class="top-brand" href="#" aria-label="sorapbox ホーム">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+        <div><strong>sorapbox</strong><small>ソラップBOX</small></div>
+      </a>
+      <div class="search-wrap">
+        <span aria-hidden="true">⌕</span>
+        <input id="searchInput" type="search" placeholder="ファイルとフォルダを検索" aria-label="検索">
+        <kbd>Ctrl K</kbd>
+      </div>
+      <div class="top-actions">
+        <button id="uploadTopButton" class="primary-button compact" type="button">＋ アップロード</button>
+        <button id="userButton" class="avatar-button" type="button" aria-label="アカウントメニュー"><span id="avatarInitial">S</span></button>
+      </div>
+      <div id="userMenu" class="user-menu hidden">
+        <strong id="userEmail">-</strong>
+        <span>Firebaseで保護されています</span>
+        <button id="logoutButton" type="button">ログアウト</button>
+      </div>
+    </header>
+
+    <aside id="sidebar" class="sidebar">
+      <button id="closeSidebar" class="icon-button sidebar-close mobile-only" type="button" aria-label="メニューを閉じる">×</button>
+      <nav class="side-nav" aria-label="メインメニュー">
+        <button class="nav-item active" data-view="files" type="button"><span>▣</span>マイファイル</button>
+        <button class="nav-item" data-view="recent" type="button"><span>◷</span>最近</button>
+        <button class="nav-item" data-view="trash" type="button"><span>♲</span>ゴミ箱</button>
+      </nav>
+
+      <div class="storage-card">
+        <div class="storage-title"><span>保存容量</span><strong id="storageText">0 B / 1 GB</strong></div>
+        <div class="storage-bar"><i id="storageBar"></i></div>
+        <small>v1では1ファイル250MBまで</small>
+      </div>
+
+      <div class="v2-card">
+        <span>COMING IN v2</span>
+        <strong>共有リンク</strong>
+        <p>期限・パスワード付き共有を追加予定。</p>
+      </div>
+    </aside>
+    <div id="sidebarShade" class="sidebar-shade hidden"></div>
+
+    <main class="main-content">
+      <div class="page-heading">
+        <div>
+          <div id="breadcrumbs" class="breadcrumbs"></div>
+          <h1 id="pageTitle">マイファイル</h1>
+          <p id="pageSubtitle">ファイルやフォルダを整理できます。</p>
+        </div>
+        <div class="heading-actions">
+          <button id="newFolderButton" class="secondary-button" type="button">＋ 新しいフォルダ</button>
+          <button id="uploadButton" class="primary-button" type="button">⇧ アップロード</button>
+          <input id="fileInput" type="file" multiple hidden>
+        </div>
+      </div>
+
+      <section id="uploadQueue" class="upload-queue hidden" aria-live="polite"></section>
+
+      <section id="dropZone" class="drop-zone" aria-label="ファイル一覧">
+        <div class="table-toolbar">
+          <span id="itemCount">0個のアイテム</span>
+          <div>
+            <button id="sortButton" class="tool-button" type="button" title="並び順を変更">更新順 ↕</button>
+            <button id="refreshButton" class="tool-button" type="button" title="再読み込み">↻</button>
+          </div>
+        </div>
+
+        <div class="file-table-wrap">
+          <table class="file-table">
+            <thead>
+              <tr><th>名前</th><th>更新</th><th>サイズ</th><th><span class="sr-only">操作</span></th></tr>
+            </thead>
+            <tbody id="fileList"></tbody>
+          </table>
+        </div>
+
+        <div id="emptyState" class="empty-state hidden">
+          <div class="empty-icon">☁</div>
+          <h2 id="emptyTitle">まだファイルがありません</h2>
+          <p id="emptyText">ファイルをここへドラッグするか、アップロードボタンを押してください。</p>
+          <button id="emptyUploadButton" class="primary-button" type="button">最初のファイルを追加</button>
+        </div>
+
+        <div id="dropOverlay" class="drop-overlay hidden">
+          <div>⇧</div><strong>ここにドロップしてアップロード</strong>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="textDialog" class="app-dialog">
+    <form id="textDialogForm" method="dialog">
+      <div class="dialog-head"><h2 id="textDialogTitle">新しいフォルダ</h2><button class="icon-button" value="cancel" formnovalidate>×</button></div>
+      <label><span id="textDialogLabel">名前</span><input id="textDialogInput" type="text" maxlength="120" required></label>
+      <p id="textDialogError" class="form-error"></p>
+      <div class="dialog-actions"><button class="secondary-button" value="cancel" formnovalidate>キャンセル</button><button id="textDialogSubmit" class="primary-button" value="default">作成</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="confirmDialog" class="app-dialog confirm-dialog">
+    <form method="dialog">
+      <div class="dialog-symbol">!</div>
+      <h2 id="confirmTitle">確認</h2>
+      <p id="confirmText"></p>
+      <div class="dialog-actions"><button class="secondary-button" value="cancel">キャンセル</button><button id="confirmOk" class="danger-button" value="ok">実行する</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="previewDialog" class="preview-dialog">
+    <div class="preview-head"><div><strong id="previewName">プレビュー</strong><small id="previewMeta"></small></div><button id="closePreview" class="icon-button" type="button">×</button></div>
+    <div id="previewBody" class="preview-body"></div>
+  </dialog>
+
+  <div id="toastRegion" class="toast-region" aria-live="polite"></div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
