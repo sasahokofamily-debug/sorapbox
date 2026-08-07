@@ -10,9 +10,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
-  <link rel="manifest" href="/manifest.webmanifest?v=202608071154">
-  <link rel="icon" href="/icon-192.png?v=202608071154" type="image/png">
-  <link rel="apple-touch-icon" href="/icon-192.png?v=202608071154">
+  <link rel="manifest" href="/manifest.webmanifest?v=202608071202">
+  <link rel="icon" href="/icon-192.png?v=202608071202" type="image/png">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=202608071202">
   <title>sorapbox</title>
   <style>
     *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#0f172a}
@@ -25,13 +25,13 @@
 </head>
 <body>
   <div class="banner">
-    <div><strong>📸 sorapbox 写真表示 修正版</strong><span>撮影日・追加日表示 / JPG固定 / サムネイル競合修正</span></div>
-    <div class="badge">v1.5.3<small>2026/08/07 11:54</small></div>
+    <div><strong>⋯ sorapbox 削除メニュー修正</strong><span>下端の白い枠で削除ボタンが隠れないように修正</span></div>
+    <div class="badge">v1.5.4<small>2026/08/07 12:02</small></div>
   </div>
-  <iframe id="appFrame" src="./index.html?v=202608071154" title="sorapbox"></iframe>
+  <iframe id="appFrame" src="./index.html?v=202608071202" title="sorapbox"></iframe>
   <script>
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/service-worker.js?v=202608071154", {scope:"/"}).catch(console.error));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/service-worker.js?v=202608071202", {scope:"/"}).catch(console.error));
     }
     const frame=document.getElementById("appFrame");
     function injectModule(d,id,src){
@@ -43,10 +43,11 @@
     frame.addEventListener("load",()=>{
       try{
         const d=frame.contentDocument;
-        injectModule(d,"sorapboxUploadHotfixV121","./upload-hotfix-v12.js?v=202608071154");
-        injectModule(d,"sorapboxProfileSettingsV13","./profile-settings.js?v=202608071154");
-        injectModule(d,"sorapboxLoginPersistenceV14","./login-persistence.js?v=202608071154");
-        injectModule(d,"sorapboxMediaUiV153","./media-ui-v153.js?v=202608071154");
+        injectModule(d,"sorapboxUploadHotfixV121","./upload-hotfix-v12.js?v=202608071202");
+        injectModule(d,"sorapboxProfileSettingsV13","./profile-settings.js?v=202608071202");
+        injectModule(d,"sorapboxLoginPersistenceV14","./login-persistence.js?v=202608071202");
+        injectModule(d,"sorapboxMediaUiV153","./media-ui-v153.js?v=202608071202");
+        injectModule(d,"sorapboxMenuOverlapFixV154","./menu-overlap-fix-v154.js?v=202608071202");
       }catch(e){console.error("module injection failed",e)}
     });
   </script>
