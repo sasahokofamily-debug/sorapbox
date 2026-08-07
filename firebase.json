@@ -13,7 +13,7 @@
     "redirects": [
       {
         "source": "/",
-        "destination": "/updated.html",
+        "destination": "/pwa.html",
         "type": 302
       }
     ],
@@ -24,6 +24,15 @@
           {
             "key": "Cache-Control",
             "value": "no-store, no-cache, must-revalidate, max-age=0"
+          }
+        ]
+      },
+      {
+        "source": "/service-worker.js",
+        "headers": [
+          {
+            "key": "Service-Worker-Allowed",
+            "value": "/"
           }
         ]
       }
