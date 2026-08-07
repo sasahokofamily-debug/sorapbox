@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+  <meta name="theme-color" content="#1677ff">
+  <meta name="application-name" content="sorapbox">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="sorapbox">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="/manifest.webmanifest?v=202608071105">
+  <link rel="icon" href="/icon-192.png?v=202608071105" type="image/png">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=202608071105">
+  <title>sorapbox</title>
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#0f172a}
+    .banner{height:82px;padding:10px 18px;background:linear-gradient(90deg,#0284c7,#2563eb,#7c3aed);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:14px;border-bottom:4px solid #111827;box-shadow:0 8px 28px rgba(0,0,0,.22);position:relative;z-index:2}
+    .banner strong{display:block;font-size:clamp(18px,2.5vw,28px);line-height:1.05}.banner span{display:block;margin-top:4px;font-weight:750;font-size:13px}.badge{background:#fff;color:#111827;border-radius:14px;padding:8px 13px;text-align:center;font-size:15px;font-weight:900;white-space:nowrap}.badge small{display:block;font-size:10px;margin-top:2px;color:#4f46e5}
+    iframe{display:block;width:100%;height:calc(100% - 82px);border:0;background:#fff}
+    @media(display-mode:standalone){.banner{height:52px;padding-top:max(8px,env(safe-area-inset-top));}.banner span,.badge small{display:none}.banner strong{font-size:16px}.badge{font-size:12px;padding:6px 9px}iframe{height:calc(100% - 52px)}}
+    @media(max-width:650px) and (display-mode:browser){.banner{height:96px;padding:9px 11px}.banner strong{font-size:17px}.banner span{font-size:11px}.badge{font-size:13px;padding:7px 9px}iframe{height:calc(100% - 96px)}}
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <div><strong>👤 sorapbox アカウント編集対応</strong><span>アイコン・表示名・パスワード変更 / PWA対応</span></div>
+    <div class="badge">v1.3<small>2026/08/07 11:05</small></div>
+  </div>
+  <iframe id="appFrame" src="./index.html?v=202608071105" title="sorapbox"></iframe>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => navigator.serviceWorker.register("/service-worker.js?v=202608071105", {scope:"/"}).catch(console.error));
+    }
+    const frame=document.getElementById("appFrame");
+    function injectModule(d,id,src){
+      if(!d||d.getElementById(id))return;
+      const s=d.createElement("script");
+      s.id=id;s.type="module";s.src=src;
+      d.body.appendChild(s);
+    }
+    frame.addEventListener("load",()=>{
+      try{
+        const d=frame.contentDocument;
+        injectModule(d,"sorapboxUploadHotfixV12","./upload-hotfix-v12.js?v=202608071105");
+        injectModule(d,"sorapboxProfileSettingsV13","./profile-settings.js?v=202608071105");
+      }catch(e){console.error("module injection failed",e)}
+    });
+  </script>
+</body>
+</html>
