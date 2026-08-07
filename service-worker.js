@@ -1,5 +1,11 @@
-const CACHE = "sorapbox-pwa-v1";
-const SHELL = ["/pwa.html", "/manifest.webmanifest", "/pwa-icon.svg"];
+const CACHE = "sorapbox-pwa-v2";
+const SHELL = [
+  "/pwa.html",
+  "/manifest.webmanifest",
+  "/pwa-icon.svg",
+  "/icon-192.png",
+  "/icon-512.png"
+];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
@@ -17,15 +23,11 @@ self.addEventListener("fetch", event => {
   if (url.origin !== location.origin) return;
 
   if (event.request.mode === "navigate") {
-    event.respondWith(
-      fetch(event.request).catch(() => caches.match("/pwa.html"))
-    );
+    event.respondWith(fetch(event.request).catch(() => caches.match("/pwa.html")));
     return;
   }
 
-  if (url.pathname === "/manifest.webmanifest" || url.pathname === "/pwa-icon.svg") {
-    event.respondWith(
-      caches.match(event.request).then(cached => cached || fetch(event.request))
-    );
+  if (["/manifest.webmanifest","/pwa-icon.svg","/icon-192.png","/icon-512.png"].includes(url.pathname)) {
+    event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request)));
   }
 });
