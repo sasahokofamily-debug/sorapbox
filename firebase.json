@@ -8,7 +8,10 @@
       "**/node_modules/**",
       "README.md",
       "firestore.rules",
-      "storage.rules"
+      "storage.rules",
+      "firebase-debug.log",
+      "firebase-debug.*.log",
+      "*.log"
     ],
     "redirects": [
       {
