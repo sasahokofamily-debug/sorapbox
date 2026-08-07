@@ -10,9 +10,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
-  <link rel="manifest" href="/manifest.webmanifest?v=202608071105">
-  <link rel="icon" href="/icon-192.png?v=202608071105" type="image/png">
-  <link rel="apple-touch-icon" href="/icon-192.png?v=202608071105">
+  <link rel="manifest" href="/manifest.webmanifest?v=202608071126">
+  <link rel="icon" href="/icon-192.png?v=202608071126" type="image/png">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=202608071126">
   <title>sorapbox</title>
   <style>
     *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#0f172a}
@@ -25,13 +25,13 @@
 </head>
 <body>
   <div class="banner">
-    <div><strong>👤 sorapbox アカウント編集対応</strong><span>アイコン・表示名・パスワード変更 / PWA対応</span></div>
-    <div class="badge">v1.3<small>2026/08/07 11:05</small></div>
+    <div><strong>🔐 sorapbox ログイン保持設定対応</strong><span>この端末のみ保持ON/OFF・アイコン・表示名・パスワード変更</span></div>
+    <div class="badge">v1.4<small>2026/08/07 11:26</small></div>
   </div>
-  <iframe id="appFrame" src="./index.html?v=202608071105" title="sorapbox"></iframe>
+  <iframe id="appFrame" src="./index.html?v=202608071126" title="sorapbox"></iframe>
   <script>
     if ("serviceWorker" in navigator) {
-      window.addEventListener("load", () => navigator.serviceWorker.register("/service-worker.js?v=202608071105", {scope:"/"}).catch(console.error));
+      window.addEventListener("load", () => navigator.serviceWorker.register("/service-worker.js?v=202608071126", {scope:"/"}).catch(console.error));
     }
     const frame=document.getElementById("appFrame");
     function injectModule(d,id,src){
@@ -43,8 +43,9 @@
     frame.addEventListener("load",()=>{
       try{
         const d=frame.contentDocument;
-        injectModule(d,"sorapboxUploadHotfixV12","./upload-hotfix-v12.js?v=202608071105");
-        injectModule(d,"sorapboxProfileSettingsV13","./profile-settings.js?v=202608071105");
+        injectModule(d,"sorapboxUploadHotfixV12","./upload-hotfix-v12.js?v=202608071126");
+        injectModule(d,"sorapboxProfileSettingsV13","./profile-settings.js?v=202608071126");
+        injectModule(d,"sorapboxLoginPersistenceV14","./login-persistence.js?v=202608071126");
       }catch(e){console.error("module injection failed",e)}
     });
   </script>
