@@ -10,9 +10,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
-  <link rel="manifest" href="/manifest.webmanifest?v=202608092116">
-  <link rel="icon" href="/icon-192.png?v=202608092116" type="image/png">
-  <link rel="apple-touch-icon" href="/icon-192.png?v=202608092116">
+  <link rel="manifest" href="/manifest.webmanifest?v=202608092120">
+  <link rel="icon" href="/icon-192.png?v=202608092120" type="image/png">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=202608092120">
   <title>sorapbox</title>
   <style>
     *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#07111f;color:#fff}
@@ -31,39 +31,39 @@
   </style>
 </head>
 <body>
-  <iframe id="appFrame" src="./index.html?v=202608092116" title="sorapbox"></iframe>
+  <iframe id="appFrame" src="./index.html?v=202608092120" title="sorapbox"></iframe>
 
   <section id="updateScreen" class="update-screen hidden" aria-label="sorapbox アップデート">
     <div class="update-card">
       <div class="update-top">
         <div class="update-brand">
-          <img class="update-icon" src="/icon-192.png?v=202608092116" alt="sorapbox">
+          <img class="update-icon" src="/icon-192.png?v=202608092120" alt="sorapbox">
           <div><strong>sorapbox</strong><small>System update</small></div>
         </div>
         <span class="update-pill">UPDATE READY</span>
       </div>
       <div class="update-hero">
-        <h1>新しいsorapboxが<br>利用できます</h1>
-        <p>操作性とフォルダまわりを改善しました。更新後も、この端末のログイン状態はそのまま保持されます。</p>
+        <h1>システムアップデート<br>v1.5.7</h1>
+        <p>フォルダ操作・写真表示・メニューまわりの修正をまとめた安定版です。更新後も、この端末のログイン状態はそのまま保持されます。</p>
       </div>
       <div class="update-info">
-        <div class="update-row"><b>←</b><span>フォルダの中に<strong>「戻る」</strong>を追加</span></div>
-        <div class="update-row"><b>↩</b><span>ファイルを<strong>マイファイル / 1つ上 / 前の場所</strong>へ戻せるように改善</span></div>
-        <div class="update-row"><b>✦</b><span>今後のアップデート画面をAndroid風のシステムUIに変更</span></div>
+        <div class="update-row"><b>📁</b><span>フォルダ内アップロードと<strong>戻る・移動操作</strong>を安定化</span></div>
+        <div class="update-row"><b>🖼</b><span>同名画像でも<strong>正しいサムネイル</strong>を表示し、撮影日・追加日にも対応</span></div>
+        <div class="update-row"><b>⋯</b><span>下端でも<strong>削除メニューが隠れにくい</strong>よう操作性を改善</span></div>
       </div>
-      <div class="update-meta"><span>バージョン <strong>1.5.6</strong></span><span>ログイン保持 <strong>ON対応</strong></span></div>
+      <div class="update-meta"><span>バージョン <strong>1.5.7</strong></span><span>ログイン保持 <strong>維持</strong></span></div>
       <div class="update-progress"><i id="updateProgressBar"></i></div>
       <p id="updateStatus" class="update-status">アップデートの準備ができています。</p>
       <div class="update-actions">
         <button id="updateLater" class="update-btn secondary" type="button">あとで</button>
         <button id="updateNow" class="update-btn primary" type="button">アップデート</button>
       </div>
-      <div class="update-login-note"><span>●</span> アカウントのログイン状態は削除しません</div>
+      <div class="update-login-note"><span>●</span> アカウントのログイン状態と保持設定は削除しません</div>
     </div>
   </section>
 
   <script>
-    const VERSION="1.5.6";
+    const VERSION="1.5.7";
     const SEEN_KEY="sorapbox:update-screen-seen";
     const screen=document.getElementById("updateScreen");
     const updateNow=document.getElementById("updateNow");
@@ -76,23 +76,23 @@
     updateLater.onclick=()=>screen.classList.add("hidden");
     updateNow.onclick=async()=>{
       updateNow.disabled=true;updateLater.disabled=true;
-      const steps=[[12,"アップデートを確認しています…"],[34,"新しいファイルを準備しています…"],[58,"キャッシュを更新しています…"],[82,"sorapboxを最適化しています…"],[100,"アップデート完了"]];
+      const steps=[[10,"アップデートを確認しています…"],[28,"パッケージを準備しています…"],[48,"新しいファイルを適用しています…"],[68,"キャッシュを更新しています…"],[86,"sorapboxを最適化しています…"],[100,"アップデート完了"]];
       for(const [pct,text] of steps){
         progress.style.width=pct+"%";status.textContent=text;
-        if(pct===58){
+        if(pct===68){
           try{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith("sorapbox-")).map(k=>caches.delete(k)))}catch(e){console.warn("cache refresh",e)}
           try{const reg=await navigator.serviceWorker?.getRegistration("/");await reg?.update()}catch(e){console.warn("sw update",e)}
         }
-        await new Promise(r=>setTimeout(r,pct===100?350:280));
+        await new Promise(r=>setTimeout(r,pct===100?420:300));
       }
       localStorage.setItem(SEEN_KEY,VERSION);
       location.reload();
     };
 
-    if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=202608092116",{scope:"/"}).catch(console.error))}
+    if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=202608092120",{scope:"/"}).catch(console.error))}
     const frame=document.getElementById("appFrame");
     function injectModule(d,id,src){if(!d||d.getElementById(id))return;const s=d.createElement("script");s.id=id;s.type="module";s.src=src;d.body.appendChild(s)}
-    frame.addEventListener("load",()=>{try{const d=frame.contentDocument;injectModule(d,"sorapboxUploadHotfixV122","./upload-hotfix-v12.js?v=202608092116");injectModule(d,"sorapboxProfileSettingsV13","./profile-settings.js?v=202608092116");injectModule(d,"sorapboxLoginPersistenceV14","./login-persistence.js?v=202608092116");injectModule(d,"sorapboxMediaUiV153","./media-ui-v153.js?v=202608092116");injectModule(d,"sorapboxMenuOverlapFixV154","./menu-overlap-fix-v154.js?v=202608092116");injectModule(d,"sorapboxFolderMoveV156","./folder-move-v156.js?v=202608092116");injectModule(d,"sorapboxFolderNavigationV156","./folder-navigation-v156.js?v=202608092116")}catch(e){console.error("module injection failed",e)}});
+    frame.addEventListener("load",()=>{try{const d=frame.contentDocument;injectModule(d,"sorapboxUploadHotfixV122","./upload-hotfix-v12.js?v=202608092120");injectModule(d,"sorapboxProfileSettingsV13","./profile-settings.js?v=202608092120");injectModule(d,"sorapboxLoginPersistenceV14","./login-persistence.js?v=202608092120");injectModule(d,"sorapboxMediaUiV153","./media-ui-v153.js?v=202608092120");injectModule(d,"sorapboxMenuOverlapFixV154","./menu-overlap-fix-v154.js?v=202608092120");injectModule(d,"sorapboxFolderMoveV156","./folder-move-v156.js?v=202608092120");injectModule(d,"sorapboxFolderNavigationV156","./folder-navigation-v156.js?v=202608092120")}catch(e){console.error("module injection failed",e)}});
   </script>
 </body>
 </html>
