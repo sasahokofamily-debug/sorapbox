@@ -10,9 +10,9 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="format-detection" content="telephone=no">
-  <link rel="manifest" href="/manifest.webmanifest?v=202608092120">
-  <link rel="icon" href="/icon-192.png?v=202608092120" type="image/png">
-  <link rel="apple-touch-icon" href="/icon-192.png?v=202608092120">
+  <link rel="manifest" href="/manifest.webmanifest?v=202608100821">
+  <link rel="icon" href="/icon-192.png?v=202608100821" type="image/png">
+  <link rel="apple-touch-icon" href="/icon-192.png?v=202608100821">
   <title>sorapbox</title>
   <style>
     *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#07111f;color:#fff}
@@ -24,34 +24,34 @@
     .update-hero{padding:30px 0 22px}.update-hero h1{margin:0;font-size:clamp(30px,7vw,44px);line-height:1.08;letter-spacing:-.045em}.update-hero p{margin:13px 0 0;color:#a9b6c9;font-size:14px;line-height:1.75}
     .update-info{display:grid;gap:9px;margin:0 0 22px;padding:16px;border-radius:18px;background:rgba(255,255,255,.045)}.update-row{display:flex;align-items:flex-start;gap:11px;color:#dce7f7;font-size:13px}.update-row b{display:grid;place-items:center;width:25px;height:25px;flex:none;border-radius:8px;background:rgba(87,145,255,.13);color:#8db7ff}.update-row span{padding-top:3px;line-height:1.5}
     .update-meta{display:flex;justify-content:space-between;gap:12px;margin:16px 0;color:#8190a6;font-size:11px}.update-meta strong{color:#d7e2f2;font-weight:750}
-    .update-progress{height:7px;overflow:hidden;border-radius:999px;background:#1d2a3d}.update-progress i{display:block;width:0;height:100%;border-radius:999px;background:linear-gradient(90deg,#4b8cff,#77c0ff);transition:width .18s ease}.update-status{min-height:20px;margin:9px 0 0;color:#8fa1b8;font-size:12px}
+    .update-progress{height:7px;overflow:hidden;border-radius:999px;background:#1d2a3d}.update-progress i{display:block;width:0;height:100%;border-radius:999px;background:linear-gradient(90deg,#4b8cff,#77c0ff);transition:width .55s cubic-bezier(.2,.75,.3,1)}.update-status{min-height:20px;margin:9px 0 0;color:#8fa1b8;font-size:12px}
     .update-actions{display:grid;grid-template-columns:1fr 1.7fr;gap:10px;margin-top:20px}.update-btn{height:50px;border:0;border-radius:15px;font:inherit;font-weight:850;cursor:pointer}.update-btn.secondary{color:#c8d5e8;background:#172338}.update-btn.primary{color:#fff;background:linear-gradient(135deg,#337cff,#5ca7ff);box-shadow:0 12px 30px rgba(40,112,255,.26)}.update-btn:disabled{opacity:.55;cursor:wait}
     .update-login-note{display:flex;align-items:center;gap:7px;justify-content:center;margin-top:16px;color:#7890ad;font-size:11px}.update-login-note span{color:#64d39a}
     @media(max-width:560px){.update-screen{padding:15px;align-items:end}.update-card{padding:23px 20px max(24px,env(safe-area-inset-bottom));border-radius:28px 28px 0 0;width:calc(100% + 30px);margin:0 -15px -15px}.update-icon{width:58px;height:58px;border-radius:17px}.update-actions{grid-template-columns:1fr}.update-btn.secondary{order:2}}
   </style>
 </head>
 <body>
-  <iframe id="appFrame" src="./index.html?v=202608092120" title="sorapbox"></iframe>
+  <iframe id="appFrame" src="./index.html?v=202608100821" title="sorapbox"></iframe>
 
   <section id="updateScreen" class="update-screen hidden" aria-label="sorapbox アップデート">
     <div class="update-card">
       <div class="update-top">
         <div class="update-brand">
-          <img class="update-icon" src="/icon-192.png?v=202608092120" alt="sorapbox">
+          <img class="update-icon" src="/icon-192.png?v=202608100821" alt="sorapbox">
           <div><strong>sorapbox</strong><small>System update</small></div>
         </div>
         <span class="update-pill">UPDATE READY</span>
       </div>
       <div class="update-hero">
-        <h1>システムアップデート<br>v1.5.7</h1>
-        <p>フォルダ操作・写真表示・メニューまわりの修正をまとめた安定版です。更新後も、この端末のログイン状態はそのまま保持されます。</p>
+        <h1>システムアップデート<br>v1.5.8</h1>
+        <p>アップデート処理を見やすくしました。進捗を段階的に表示し、完了までの流れが分かるようになっています。更新後も、この端末のログイン状態はそのまま保持されます。</p>
       </div>
       <div class="update-info">
-        <div class="update-row"><b>📁</b><span>フォルダ内アップロードと<strong>戻る・移動操作</strong>を安定化</span></div>
-        <div class="update-row"><b>🖼</b><span>同名画像でも<strong>正しいサムネイル</strong>を表示し、撮影日・追加日にも対応</span></div>
-        <div class="update-row"><b>⋯</b><span>下端でも<strong>削除メニューが隠れにくい</strong>よう操作性を改善</span></div>
+        <div class="update-row"><b>↻</b><span>更新処理を<strong>約8秒</strong>かけて段階的に表示</span></div>
+        <div class="update-row"><b>✓</b><span>ファイル適用後に<strong>整合性チェック</strong>とキャッシュ更新を実行</span></div>
+        <div class="update-row"><b>⚡</b><span>最適化・再起動準備・完了まで<strong>Android風</strong>に表示</span></div>
       </div>
-      <div class="update-meta"><span>バージョン <strong>1.5.7</strong></span><span>ログイン保持 <strong>維持</strong></span></div>
+      <div class="update-meta"><span>バージョン <strong>1.5.8</strong></span><span>所要時間 <strong>約8秒</strong></span></div>
       <div class="update-progress"><i id="updateProgressBar"></i></div>
       <p id="updateStatus" class="update-status">アップデートの準備ができています。</p>
       <div class="update-actions">
@@ -63,7 +63,7 @@
   </section>
 
   <script>
-    const VERSION="1.5.7";
+    const VERSION="1.5.8";
     const SEEN_KEY="sorapbox:update-screen-seen";
     const screen=document.getElementById("updateScreen");
     const updateNow=document.getElementById("updateNow");
@@ -76,23 +76,34 @@
     updateLater.onclick=()=>screen.classList.add("hidden");
     updateNow.onclick=async()=>{
       updateNow.disabled=true;updateLater.disabled=true;
-      const steps=[[10,"アップデートを確認しています…"],[28,"パッケージを準備しています…"],[48,"新しいファイルを適用しています…"],[68,"キャッシュを更新しています…"],[86,"sorapboxを最適化しています…"],[100,"アップデート完了"]];
-      for(const [pct,text] of steps){
-        progress.style.width=pct+"%";status.textContent=text;
-        if(pct===68){
+      const steps=[
+        {pct:7,text:"アップデートを確認しています…",delay:900},
+        {pct:18,text:"更新パッケージを準備しています…",delay:850},
+        {pct:32,text:"新しいファイルをダウンロードしています…",delay:950},
+        {pct:47,text:"システムファイルを適用しています…",delay:900},
+        {pct:63,text:"ファイルの整合性を確認しています…",delay:1100,refresh:true},
+        {pct:77,text:"キャッシュを最適化しています…",delay:900},
+        {pct:89,text:"sorapboxを最適化しています…",delay:850},
+        {pct:96,text:"再起動の準備をしています…",delay:700},
+        {pct:100,text:"アップデート完了 ✓",delay:1100}
+      ];
+      for(const step of steps){
+        progress.style.width=step.pct+"%";
+        status.textContent=`${step.pct}% ・ ${step.text}`;
+        if(step.refresh){
           try{const keys=await caches.keys();await Promise.all(keys.filter(k=>k.startsWith("sorapbox-")).map(k=>caches.delete(k)))}catch(e){console.warn("cache refresh",e)}
           try{const reg=await navigator.serviceWorker?.getRegistration("/");await reg?.update()}catch(e){console.warn("sw update",e)}
         }
-        await new Promise(r=>setTimeout(r,pct===100?420:300));
+        await new Promise(r=>setTimeout(r,step.delay));
       }
       localStorage.setItem(SEEN_KEY,VERSION);
       location.reload();
     };
 
-    if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=202608092120",{scope:"/"}).catch(console.error))}
+    if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("/service-worker.js?v=202608100821",{scope:"/"}).catch(console.error))}
     const frame=document.getElementById("appFrame");
     function injectModule(d,id,src){if(!d||d.getElementById(id))return;const s=d.createElement("script");s.id=id;s.type="module";s.src=src;d.body.appendChild(s)}
-    frame.addEventListener("load",()=>{try{const d=frame.contentDocument;injectModule(d,"sorapboxUploadHotfixV122","./upload-hotfix-v12.js?v=202608092120");injectModule(d,"sorapboxProfileSettingsV13","./profile-settings.js?v=202608092120");injectModule(d,"sorapboxLoginPersistenceV14","./login-persistence.js?v=202608092120");injectModule(d,"sorapboxMediaUiV153","./media-ui-v153.js?v=202608092120");injectModule(d,"sorapboxMenuOverlapFixV154","./menu-overlap-fix-v154.js?v=202608092120");injectModule(d,"sorapboxFolderMoveV156","./folder-move-v156.js?v=202608092120");injectModule(d,"sorapboxFolderNavigationV156","./folder-navigation-v156.js?v=202608092120")}catch(e){console.error("module injection failed",e)}});
+    frame.addEventListener("load",()=>{try{const d=frame.contentDocument;injectModule(d,"sorapboxUploadHotfixV122","./upload-hotfix-v12.js?v=202608100821");injectModule(d,"sorapboxProfileSettingsV13","./profile-settings.js?v=202608100821");injectModule(d,"sorapboxLoginPersistenceV14","./login-persistence.js?v=202608100821");injectModule(d,"sorapboxMediaUiV153","./media-ui-v153.js?v=202608100821");injectModule(d,"sorapboxMenuOverlapFixV154","./menu-overlap-fix-v154.js?v=202608100821");injectModule(d,"sorapboxFolderMoveV156","./folder-move-v156.js?v=202608100821");injectModule(d,"sorapboxFolderNavigationV156","./folder-navigation-v156.js?v=202608100821")}catch(e){console.error("module injection failed",e)}});
   </script>
 </body>
 </html>
